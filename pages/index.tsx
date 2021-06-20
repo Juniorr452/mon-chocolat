@@ -1,8 +1,8 @@
 import React from 'react';
 import Head from 'next/head'
-import Link from 'next/link'
 import { Box, Container, HStack, VStack, Heading, Text, Icon, Button, SimpleGrid, Select } from '@chakra-ui/react';
-import { FaCartPlus, FaShoppingCart } from 'react-icons/fa';
+import { FaCartPlus } from 'react-icons/fa';
+import TopNav from '../components/TopNav';
 
 export default function Home() {
   return (
@@ -13,37 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Box bg="gray.700" as="nav">
-        <Container 
-          maxW={{
-            base: 'container.md',
-            lg: 'container.lg',
-            xl: 'container.xl'
-          }}
-          py="4"
-        >
-          <HStack justify="space-between">
-            <Heading
-              fontSize="2xl"
-            >
-              mon chocolat
-            </Heading>
-            <Link href="/cart" passHref>
-              <Button
-                p="2"
-                as="a"
-                bg="transparent"
-                _hover={{
-                  bg: "gray.500"
-                }}
-                borderRadius="100%"
-              >
-                <Icon as={FaShoppingCart} fontSize="xl"/>
-              </Button>
-            </Link>
-          </HStack>
-        </Container>
-      </Box>
+      <TopNav />
 
       <Container 
         maxW={{
@@ -52,7 +22,7 @@ export default function Home() {
           xl: 'container.xl'
         }}
         mt="12"
-        mb="4"
+        mb="6"
       >
         <HStack justify="space-between">
           <Heading as="h1">Store</Heading>

@@ -1,4 +1,6 @@
 import Head from 'next/head'
+import TopNav from '../components/TopNav'
+import { Box, Container, HStack, VStack, Heading, Text, Icon, Button, SimpleGrid, Select } from '@chakra-ui/react'
 
 export default function Cart() {
   return (
@@ -9,7 +11,29 @@ export default function Cart() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      
+      <TopNav />
+
+      <Container 
+        maxW={{
+          base: 'container.md',
+          lg: 'container.lg',
+          xl: 'container.xl'
+        }}
+        mt="12"
+        mb="6"
+      >
+        <Heading as="h1">Panier</Heading>
+      </Container>
+
+      <Container 
+        maxW={{
+          base: 'container.md',
+          lg: 'container.lg',
+          xl: 'container.xl'
+        }}
+      >
+        Content
+      </Container>
     </main>
   )
 }
