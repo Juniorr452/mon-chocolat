@@ -1,8 +1,8 @@
 import React from 'react';
 import Head from 'next/head'
 import Link from 'next/link'
-import { Box, Container, HStack, Heading, Text, Icon, Button } from '@chakra-ui/react';
-import { FaShoppingCart } from 'react-icons/fa';
+import { Box, Container, HStack, VStack, Heading, Text, Icon, Button, SimpleGrid, Select } from '@chakra-ui/react';
+import { FaCartPlus, FaShoppingCart } from 'react-icons/fa';
 
 export default function Home() {
   return (
@@ -45,7 +45,75 @@ export default function Home() {
         </Container>
       </Box>
 
-      
+      <Container 
+        maxW={{
+          base: 'container.md',
+          lg: 'container.lg',
+          xl: 'container.xl'
+        }}
+        mt="12"
+        mb="4"
+      >
+        <HStack justify="space-between">
+          <Heading as="h1">Store</Heading>
+          <Select
+            bg="gray.300"
+            color="black"
+            maxW={{
+              base: "200px",
+              lg: "300px"
+            }}
+          >
+            <option value="">Default sorting</option>
+            <option value="">Prix (descendant)</option>
+            <option value="">Prix (ascendant)</option>
+          </Select>
+        </HStack>
+      </Container>
+
+      <Container 
+        maxW={{
+          base: 'container.md',
+          lg: 'container.lg',
+          xl: 'container.xl'
+        }}
+        py="4"
+      >
+        <SimpleGrid minChildWidth="300px" gap="40px" maxW="992px" mx="auto">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(product => (
+            <VStack
+              key={product}
+              bg="gray.400"
+              p="8"
+              color="black"
+              pos="relative"
+              borderRadius="32px"
+            >
+              <HStack w="100%">
+                <Button
+                  p="2"
+                  as="a"
+                  ml="auto"
+                  bg="transparent"
+                  border="1px"
+                  borderColor="gray.500"
+                  borderRadius="100%"
+                  cursor="pointer"
+                >
+                  <Icon as={FaCartPlus} fontSize="md"/>
+                </Button>
+              </HStack>
+
+              <Box w="100px" h="200px" bg="gray.700"></Box>
+
+              <VStack spacing="0">
+                <Text mt="8" fontSize="larger" fontWeight="bold" letterSpacing="3px">Un chocolat</Text>
+                <Text>$59.99</Text>
+              </VStack>
+            </VStack>
+          ))}
+        </SimpleGrid>
+      </Container>
     </main>
   )
 }
