@@ -17,19 +17,19 @@ export default function TopNav() {
           <Heading
             fontSize="2xl"
           >
-            mon chocolat
+            <Link href="/">
+              <a>mon chocolat</a>
+            </Link>
           </Heading>
           <Link href="/cart" passHref>
             <Button
               p="2"
               as="a"
-              bg="transparent"
-              _hover={{
-                bg: "gray.500"
-              }}
+              colorScheme="whiteAlpha"
+              variant="outline"
               borderRadius="100%"
             >
-              <Icon as={FaShoppingCart} fontSize="xl"/>
+              <Icon color="gray.300" as={FaShoppingCart} fontSize="xl"/>
             </Button>
           </Link>
         </HStack>
