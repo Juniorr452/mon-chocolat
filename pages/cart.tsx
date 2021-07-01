@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import TopNav from '../components/TopNav'
-import { Box, Container, HStack, VStack, Heading, Text, Icon, Button, SimpleGrid, Select } from '@chakra-ui/react'
+import { Box, Container, Stack, HStack, VStack, Heading, Text, Icon, Button, SimpleGrid, Select } from '@chakra-ui/react'
+import CartItem from '../components/CartItem'
 
 export default function Cart() {
   return (
@@ -32,8 +33,54 @@ export default function Cart() {
           xl: 'container.xl'
         }}
       >
-        Content
+        <Stack
+          direction={{
+            base: 'column',
+            lg: 'row'
+          }}
+          spacing="8"
+        >
+          <VStack 
+            w="100%"
+            spacing="4"
+          >
+            {[1, 2, 3].map(product => (
+              <CartItem key={product}/>
+            ))}
+          </VStack>
+
+          <VStack 
+            align="start" 
+            spacing="4"
+            w="100%"
+            h="fit-content"
+            maxW="300px"
+            bg="gray.100" 
+            p="6" 
+            color="black"
+          >
+            <Box>
+              <Text fontWeight="bold">Entrega</Text>
+              <Text>Entrega pela loja (3 dias úteis)</Text>
+            </Box>
+
+            <HStack justify="space-between">
+              <Text>Frete</Text>
+              <Text>$12.99</Text>
+            </HStack>
+
+            <HStack justify="space-between">
+              <Text>Total</Text>
+              <Text>$192.96</Text>
+            </HStack>
+
+            <Button colorScheme="orange">Finalizar Compra</Button>
+          </VStack>
+        </Stack>
+ 
       </Container>
+
+ 
     </main>
   )
 }
