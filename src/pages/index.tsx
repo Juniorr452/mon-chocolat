@@ -3,8 +3,22 @@ import Head from 'next/head'
 import { Box, Container, HStack, VStack, Heading, Text, Icon, Button, SimpleGrid, Select } from '@chakra-ui/react';
 import { FaCartPlus } from 'react-icons/fa';
 import TopNav from '../components/TopNav';
+import { useQuery } from 'react-query';
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+}
 
 export default function Home() {
+  const { data: products } = useQuery<Product[]>('products', async () => {
+    const response = await fetch('./api/products');
+    const data = await response.json();
+
+    return data.products;
+  });
+
   return (
     <main>
       <Head>
@@ -50,9 +64,9 @@ export default function Home() {
         py="4"
       >
         <SimpleGrid minChildWidth="300px" gap="40px" maxW="992px" mx="auto">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(product => (
+          {products && products.map(({id, name, price}) => (
             <VStack
-              key={product}
+              key={id}
               bg="gray.400"
               p="8"
               color="black"
@@ -77,8 +91,8 @@ export default function Home() {
               <Box w="100px" h="200px" bg="gray.700"></Box>
 
               <VStack spacing="0">
-                <Text mt="8" fontSize="larger" fontWeight="bold" letterSpacing="3px">Un chocolat</Text>
-                <Text>$59.99</Text>
+                <Text mt="8" fontSize="larger" fontWeight="bold" letterSpacing="3px">{name}</Text>
+                <Text>${price}</Text>
               </VStack>
             </VStack>
           ))}
