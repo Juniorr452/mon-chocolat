@@ -1,6 +1,8 @@
+import { ChangeEvent } from 'react';
 import { FaTimes } from 'react-icons/fa'
-import { Image, Box, Flex, Container, HStack, VStack, Heading, Text, Icon, Button, SimpleGrid, Select, Stack } from '@chakra-ui/react'
-
+import { Image, Box, Flex, Text, Icon, Button, Stack, Select } from '@chakra-ui/react'
+import { useAppDispatch } from '../../hooks'
+import { changeQuantity, remove } from '../../features/cart/cartSlice';
 interface CartItemProps {
   id: number;
   name: string;
@@ -16,6 +18,21 @@ export default function CartItem({
   quantity,
   availableQuantity
 }: CartItemProps) {
+  const dispatch = useAppDispatch();
+
+  function handleQuantityChange(e: ChangeEvent<HTMLSelectElement>) {
+    const qtd = Number(e.target.value);
+
+    dispatch(changeQuantity({
+      id,
+      quantity: qtd
+    }));
+  }
+
+  function handleRemove() {
+    dispatch(remove(id));
+  }
+
   return (
     <Box pos="relative" bg="gray.100" px="8" py="4" w="100%" borderRadius="12" color="black">
       <Stack 
@@ -66,7 +83,17 @@ export default function CartItem({
 
             <Box>
               <Text fontWeight="bold">Quantité</Text>
-              <Text>{quantity}/{availableQuantity}</Text>
+              <Select size="sm" variant="filled" onChange={handleQuantityChange} data-testid="select">
+                {Array.from({ length: availableQuantity }, (_, i) => i+1).map((qtd) => (
+                  <option 
+                    key={qtd} 
+                    selected={qtd === quantity}
+                  >
+                    {qtd}
+                  </option>
+                ))}
+                
+              </Select>
             </Box>
 
             <Box>
@@ -88,6 +115,7 @@ export default function CartItem({
             base: "auto",
             lg: "auto"
           }}
+          onClick={handleRemove}
         >
           <Icon as={FaTimes}></Icon>
         </Button>
