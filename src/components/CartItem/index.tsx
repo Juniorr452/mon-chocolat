@@ -1,9 +1,23 @@
 import { FaTimes } from 'react-icons/fa'
 import { Image, Box, Flex, Container, HStack, VStack, Heading, Text, Icon, Button, SimpleGrid, Select, Stack } from '@chakra-ui/react'
 
-export default function CartItem() {
+interface CartItemProps {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  availableQuantity: number;
+}
+
+export default function CartItem({
+  id,
+  name,
+  price,
+  quantity,
+  availableQuantity
+}: CartItemProps) {
   return (
-    <Box pos="relative" bg="gray.100" px="8" py="4" w="100%" color="black">
+    <Box pos="relative" bg="gray.100" px="8" py="4" w="100%" borderRadius="12" color="black">
       <Stack 
         direction={{
           base: "column",
@@ -32,7 +46,7 @@ export default function CartItem() {
               lg: "left"
             }}
           >
-            Un chocolat
+            {name}
           </Text>
 
           <Flex
@@ -43,21 +57,21 @@ export default function CartItem() {
               base: "auto",
               lg: "0"
             }}
-            mt="6"
+            mt="3"
           >
             <Box>
-              <Text fontWeight="bold">Cada</Text>
-              <Text>$59.99</Text>
+              <Text fontWeight="bold">Prix</Text>
+              <Text>${price}</Text>
             </Box>
 
             <Box>
-              <Text fontWeight="bold">Quantidade</Text>
-              <Text>$59.99</Text>
+              <Text fontWeight="bold">Quantité</Text>
+              <Text>{quantity}/{availableQuantity}</Text>
             </Box>
 
             <Box>
               <Text fontWeight="bold">Total</Text>
-              <Text>$59.99</Text>
+              <Text>${(price * quantity).toFixed(2)}</Text>
             </Box>
           </Flex>
         </Flex>
@@ -74,7 +88,6 @@ export default function CartItem() {
             base: "auto",
             lg: "auto"
           }}
-          borderRadius="full"
         >
           <Icon as={FaTimes}></Icon>
         </Button>

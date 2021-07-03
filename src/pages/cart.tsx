@@ -2,8 +2,12 @@ import Head from 'next/head'
 import TopNav from '../components/TopNav'
 import { Box, Container, Stack, HStack, VStack, Heading, Text, Icon, Button, SimpleGrid, Select } from '@chakra-ui/react'
 import CartItem from '../components/CartItem'
+import CheckoutBox from '../components/CheckoutBox'
+import { useAppSelector } from '../hooks'
 
 export default function Cart() {
+  const productsInCart = Object.values(useAppSelector(state => state.cart.products));
+
   return (
     <main>
       <Head>
@@ -44,38 +48,19 @@ export default function Cart() {
             w="100%"
             spacing="4"
           >
-            {[1, 2, 3].map(product => (
-              <CartItem key={product}/>
+            {productsInCart.map(product => (
+              <CartItem key={product.id} {...product}/>
             ))}
           </VStack>
 
-          <VStack 
-            align="start" 
-            spacing="4"
-            w="100%"
-            h="fit-content"
-            maxW="300px"
-            bg="gray.100" 
-            p="6" 
-            color="black"
-          >
-            <Box>
-              <Text fontWeight="bold">Entrega</Text>
-              <Text>Entrega pela loja (3 dias úteis)</Text>
-            </Box>
-
-            <HStack justify="space-between">
-              <Text>Frete</Text>
-              <Text>$12.99</Text>
-            </HStack>
-
-            <HStack justify="space-between">
-              <Text>Total</Text>
-              <Text>$192.96</Text>
-            </HStack>
-
-            <Button colorScheme="orange">Finalizar Compra</Button>
-          </VStack>
+          
+          <CheckoutBox 
+            products={productsInCart} 
+            shipping={{
+              name: 'Standard (3 jours ouvrables)',
+              price: 9.99
+            }}
+          />
         </Stack>
  
       </Container>
