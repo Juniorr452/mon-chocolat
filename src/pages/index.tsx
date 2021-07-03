@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head'
-import { Container, HStack, Heading, SimpleGrid, Select } from '@chakra-ui/react';
+import { Container, HStack, Heading, SimpleGrid, Select, CircularProgress, Box } from '@chakra-ui/react';
 import TopNav from '../components/TopNav';
 import { useQuery } from 'react-query';
 import ProductItem from '../components/ProductItem';
@@ -13,7 +13,7 @@ interface Product {
 }
 
 export default function Home() {
-  const { data: products } = useQuery<Product[]>('products', async () => {
+  const { data: products, isLoading, isFetching } = useQuery<Product[]>('products', async () => {
     const response = await fetch('./api/products');
     const data = await response.json();
 
@@ -40,7 +40,16 @@ export default function Home() {
         mb="6"
       >
         <HStack justify="space-between">
-          <Heading as="h1">Store</Heading>
+          <HStack>
+            <Heading as="h1">Store</Heading>
+            {!isLoading && isFetching && (
+              <CircularProgress
+                isIndeterminate 
+                size="30px"
+                color="pink.400" 
+              />
+            )}
+          </HStack>
           <Select
             bg="gray.300"
             color="black"
@@ -64,9 +73,22 @@ export default function Home() {
         }}
         py="4"
       >
-        <SimpleGrid minChildWidth="300px" gap="40px" maxW="992px" mx="auto">
-          {products && products.map(product => <ProductItem key={product.id} {...product}/>)}
-        </SimpleGrid>
+        {!isLoading && (
+          <SimpleGrid minChildWidth="300px" gap="40px" maxW="992px" mx="auto">
+            {products && products.map(product => <ProductItem key={product.id} {...product}/>)}
+          </SimpleGrid>
+        )}
+
+        {isLoading && (
+          <Box w="fit-content" mx="auto">
+            <CircularProgress 
+              isIndeterminate 
+              color="pink.400" 
+              size="100px"
+              thickness="6px"
+            />
+          </Box>
+        )}
       </Container>
     </main>
   )

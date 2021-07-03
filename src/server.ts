@@ -33,6 +33,7 @@ export function makeServer({environment = "test"}) {
       this.passthrough('/_next/static/development/_devPagesManifest.json');
 
       this.namespace = 'api';
+      this.timing = 1750;
   
       this.get('/products');
     },

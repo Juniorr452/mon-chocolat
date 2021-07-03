@@ -1,4 +1,4 @@
-import { Box, HStack, VStack, Text, Icon, Button } from '@chakra-ui/react';
+import { Box, HStack, VStack, Text, Icon, Button, useToast } from '@chakra-ui/react';
 import { FaCartPlus, FaCheck } from 'react-icons/fa';
 import { add, remove } from '../../features/cart/cartSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -14,14 +14,25 @@ const ProductItem: React.FC<ProductItemProps> = (product) => {
   const productInCart = useAppSelector(state => state.cart.products.hasOwnProperty(product.id))
   const available = product.availableQuantity > 0;
   const dispatch = useAppDispatch();
+  const toast = useToast();
 
   function handleCartClick() {
     if(!available)
       return;
-    
-    productInCart
-      ? dispatch(remove(product.id))
-      : dispatch(add({...product}));
+
+    if(!productInCart) {
+      dispatch(add({...product}));
+      toast({
+        title: "Produit ajouté au panier",
+        status: 'success',
+      })
+    } else {
+      dispatch(remove(product.id))
+      toast({
+        title: "Produit retiré du panier",
+        status: 'info'
+      })
+    }
   }
 
   return (

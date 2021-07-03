@@ -14,13 +14,14 @@ interface CheckoutBoxProps {
   };
 
   products: Product[];
+  onCheckout: (total: number) => void;
 }
 
 const CheckoutBox: React.FC<CheckoutBoxProps> = ({
   shipping,
-  products
+  products,
+  onCheckout
 }) => {
-
   const total = products.reduce((prev, product) => prev + (product.price * product.quantity), 0) + shipping.price;
 
   return (
@@ -53,7 +54,13 @@ const CheckoutBox: React.FC<CheckoutBoxProps> = ({
         </HStack>
       </VStack>
 
-      <Button colorScheme="orange" mt="8">Passer la comande</Button>
+      <Button 
+        colorScheme="orange" 
+        mt="8"
+        onClick={() => onCheckout(total)}
+      >
+        Passer la comande
+      </Button>
     </Box>
   )
 }
