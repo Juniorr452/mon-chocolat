@@ -1,7 +1,7 @@
 import { Box, HStack, VStack, Text, Icon, Button } from '@chakra-ui/react';
-import { FaCartPlus } from 'react-icons/fa';
-import { add } from '../../features/cart/cartSlice';
-import { useAppDispatch } from '../../hooks';
+import { FaCartPlus, FaCheck } from 'react-icons/fa';
+import { add, remove } from '../../features/cart/cartSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 
 interface ProductItemProps {
   id: number;
@@ -11,9 +11,17 @@ interface ProductItemProps {
 }
 
 const ProductItem: React.FC<ProductItemProps> = (product) => {
+  const productInCart = useAppSelector(state => state.cart.products.hasOwnProperty(product.id))
+  const available = product.availableQuantity > 0;
   const dispatch = useAppDispatch();
+
   function handleCartClick() {
-    dispatch(add({...product}));
+    if(!available)
+      return;
+    
+    productInCart
+      ? dispatch(remove(product.id))
+      : dispatch(add({...product}));
   }
 
   return (
@@ -35,8 +43,10 @@ const ProductItem: React.FC<ProductItemProps> = (product) => {
           borderRadius="100%"
           cursor="pointer"
           onClick={handleCartClick}
+          data-testid="cartbutton"
+          isDisabled={!available}
         >
-          <Icon as={FaCartPlus} fontSize="md"/>
+          <Icon as={productInCart ? FaCheck : FaCartPlus} fontSize="md"/>
         </Button>
       </HStack>
 
@@ -44,7 +54,7 @@ const ProductItem: React.FC<ProductItemProps> = (product) => {
 
       <VStack spacing="0">
         <Text mt="8" fontSize="larger" fontWeight="bold" letterSpacing="3px">{product.name}</Text>
-        <Text>${product.price}</Text>
+        <Text>{available ? `$${product.price}` : 'indisponible' }</Text>
       </VStack>
     </VStack>
   )
