@@ -83,11 +83,16 @@ export default function CartItem({
 
             <Box>
               <Text fontWeight="bold">Quantité</Text>
-              <Select size="sm" variant="filled" onChange={handleQuantityChange} data-testid="select">
+              <Select 
+                size="sm" 
+                variant="filled"
+                defaultValue={quantity}
+                onChange={handleQuantityChange} 
+                data-testid="select"
+              >
                 {Array.from({ length: availableQuantity }, (_, i) => i+1).map((qtd) => (
                   <option 
-                    key={qtd} 
-                    selected={qtd === quantity}
+                    key={qtd}
                   >
                     {qtd}
                   </option>
