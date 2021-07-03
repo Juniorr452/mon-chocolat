@@ -1,14 +1,15 @@
 import React from 'react';
 import Head from 'next/head'
-import { Box, Container, HStack, VStack, Heading, Text, Icon, Button, SimpleGrid, Select } from '@chakra-ui/react';
-import { FaCartPlus } from 'react-icons/fa';
+import { Container, HStack, Heading, SimpleGrid, Select } from '@chakra-ui/react';
 import TopNav from '../components/TopNav';
 import { useQuery } from 'react-query';
+import ProductItem from '../components/ProductItem';
 
 interface Product {
   id: number;
   name: string;
   price: number;
+  availableQuantity: number;
 }
 
 export default function Home() {
@@ -64,38 +65,7 @@ export default function Home() {
         py="4"
       >
         <SimpleGrid minChildWidth="300px" gap="40px" maxW="992px" mx="auto">
-          {products && products.map(({id, name, price}) => (
-            <VStack
-              key={id}
-              bg="gray.400"
-              p="8"
-              color="black"
-              pos="relative"
-              borderRadius="32px"
-            >
-              <HStack w="100%">
-                <Button
-                  p="2"
-                  as="a"
-                  ml="auto"
-                  bg="transparent"
-                  border="1px"
-                  borderColor="gray.500"
-                  borderRadius="100%"
-                  cursor="pointer"
-                >
-                  <Icon as={FaCartPlus} fontSize="md"/>
-                </Button>
-              </HStack>
-
-              <Box w="100px" h="200px" bg="gray.700"></Box>
-
-              <VStack spacing="0">
-                <Text mt="8" fontSize="larger" fontWeight="bold" letterSpacing="3px">{name}</Text>
-                <Text>${price}</Text>
-              </VStack>
-            </VStack>
-          ))}
+          {products && products.map(product => <ProductItem key={product.id} {...product}/>)}
         </SimpleGrid>
       </Container>
     </main>

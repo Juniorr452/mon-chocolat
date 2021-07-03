@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { Box, Container, HStack, Heading, Icon, Button} from '@chakra-ui/react';
-import { FaShoppingCart } from 'react-icons/fa';
+import { Box, Container, HStack, Heading} from '@chakra-ui/react';
+import CartButton from './CartButton';
 
 export default function TopNav() {
   return (
@@ -21,17 +21,7 @@ export default function TopNav() {
               <a>mon chocolat</a>
             </Link>
           </Heading>
-          <Link href="/cart" passHref>
-            <Button
-              p="2"
-              as="a"
-              colorScheme="whiteAlpha"
-              variant="outline"
-              borderRadius="100%"
-            >
-              <Icon color="gray.300" as={FaShoppingCart} fontSize="xl"/>
-            </Button>
-          </Link>
+          <CartButton />
         </HStack>
       </Container>
     </Box>
