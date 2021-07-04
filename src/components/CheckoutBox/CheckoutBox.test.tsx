@@ -55,6 +55,20 @@ describe('CheckoutBox', () => {
     expect(screen.getByText('--.--', {exact: false})).toBeInTheDocument();
   });
 
+  it('disables the checkout button if there are no products in the list', () => {
+    render(
+      <CheckoutBox
+        shipping={{
+          name: 'shipping',
+          price: 0
+        }}
+        products={[]}
+      />
+    );
+
+    expect(screen.getByRole('button')).toBeDisabled();
+  })
+
   it('shows free shipping when the shipping cost is zero', () => {
     const shipping = {
       name: 'shipping',
