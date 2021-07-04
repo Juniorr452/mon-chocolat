@@ -5,11 +5,12 @@ import CartItem from '../components/CartItem'
 import CheckoutBox from '../components/CheckoutBox'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { clear } from '../features/cart/cartSlice'
-import { useMutation } from 'react-query'
+import { useMutation, useQueryClient } from 'react-query'
 
 export default function Cart() {
   const productsInCart = Object.values(useAppSelector(state => state.cart.products));
   const dispatch = useAppDispatch();
+  const queryClient = useQueryClient();
   const toast = useToast();
 
   const mutation = useMutation(async () => {
@@ -22,7 +23,10 @@ export default function Cart() {
     })
   }, {
     onSuccess: () => {
+      queryClient.invalidateQueries('products');
+      
       dispatch(clear());
+
       toast({
         title: "Achat réussi!",
         status: "success",

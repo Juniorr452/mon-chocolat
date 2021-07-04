@@ -18,6 +18,9 @@ export default function Home() {
     const data = await response.json();
 
     return data.products;
+  }, {
+    cacheTime: 15 * 1000,
+    refetchOnWindowFocus: false
   });
 
   return (
