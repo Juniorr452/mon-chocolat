@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Box, Flex, Container, HStack, Heading, Icon, Button} from '@chakra-ui/react';
+import { Flex, Icon, Button} from '@chakra-ui/react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { useAppSelector } from '../../hooks';
 
@@ -16,7 +16,7 @@ const CartButton: React.FC = () => {
         pos="relative"
         variant="ghost"
         colorScheme="whiteAlpha"
-        
+        data-testid="cart-link"
       >
         <Icon color="gray.300" as={FaShoppingCart} fontSize="2xl"/>
 

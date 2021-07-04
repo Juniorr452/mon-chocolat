@@ -46,7 +46,6 @@ const ProductItem: React.FC<ProductItemProps> = (product) => {
       <HStack w="100%">
         <Button
           p="2"
-          as="a"
           ml="auto"
           bg="transparent"
           border="1px"

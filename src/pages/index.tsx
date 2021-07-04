@@ -74,7 +74,7 @@ export default function Home() {
         py="4"
       >
         {!isLoading && (
-          <SimpleGrid minChildWidth="300px" gap="40px" maxW="992px" mx="auto" id="products-list">
+          <SimpleGrid minChildWidth="300px" gap="40px" maxW="992px" mx="auto" data-testid="products-list">
             {products && products.map(product => <ProductItem key={product.id} {...product}/>)}
           </SimpleGrid>
         )}

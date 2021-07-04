@@ -58,6 +58,7 @@ const CheckoutBox: React.FC<CheckoutBoxProps> = ({
         colorScheme="orange" 
         mt="8"
         onClick={() => onCheckout(total)}
+        type="submit"
       >
         Passer la comande
       </Button>

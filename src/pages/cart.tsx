@@ -1,17 +1,43 @@
 import Head from 'next/head'
 import TopNav from '../components/TopNav'
-import { Container, Stack, VStack, Heading, Text } from '@chakra-ui/react'
+import { Container, Stack, VStack, Heading, Text, useToast } from '@chakra-ui/react'
 import CartItem from '../components/CartItem'
 import CheckoutBox from '../components/CheckoutBox'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { clear } from '../features/cart/cartSlice'
+import { useMutation } from 'react-query'
 
 export default function Cart() {
   const productsInCart = Object.values(useAppSelector(state => state.cart.products));
   const dispatch = useAppDispatch();
+  const toast = useToast();
 
-  function handleCheckout() {
-    dispatch(clear());
+  const mutation = useMutation(async () => {
+    return fetch('/api/checkout', {
+      method: 'POST',
+      body: JSON.stringify(productsInCart.map(({id, quantity}) => ({
+        id,
+        quantity
+      })))
+    })
+  }, {
+    onSuccess: () => {
+      dispatch(clear());
+      toast({
+        title: "Achat réussi!",
+        status: "success",
+      })
+    },
+    onError: () => {
+      toast({
+        title: "Erreur inattendue",
+        status: "error",
+      })
+    }
+  })
+
+  async function handleCheckout() {
+    mutation.mutateAsync();
   }
 
   return (
@@ -53,6 +79,7 @@ export default function Cart() {
           <VStack 
             w="100%"
             spacing="4"
+            data-testid="cart-list"
           >
             {productsInCart.length > 0 && (
               productsInCart.map(product => (

@@ -18,7 +18,7 @@ export default function TopNav() {
             fontSize="2xl"
           >
             <Link href="/">
-              <a>mon chocolat</a>
+              <a data-testid="home-link">mon chocolat</a>
             </Link>
           </Heading>
           <CartButton />
