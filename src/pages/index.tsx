@@ -14,7 +14,7 @@ interface Product {
 
 export default function Home() {
   const { data: products, isLoading, isFetching } = useQuery<Product[]>('products', async () => {
-    const response = await fetch('./api/products');
+    const response = await fetch('/api/products');
     const data = await response.json();
 
     return data.products;
@@ -74,7 +74,7 @@ export default function Home() {
         py="4"
       >
         {!isLoading && (
-          <SimpleGrid minChildWidth="300px" gap="40px" maxW="992px" mx="auto">
+          <SimpleGrid minChildWidth="300px" gap="40px" maxW="992px" mx="auto" id="products-list">
             {products && products.map(product => <ProductItem key={product.id} {...product}/>)}
           </SimpleGrid>
         )}

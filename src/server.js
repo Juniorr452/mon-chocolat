@@ -36,6 +36,10 @@ export function makeServer({environment = "test"}) {
       this.timing = 1750;
   
       this.get('/products');
+      this.post('/checkout', (schema, request) => {
+        const products = JSON.parse(request.requestBody);
+        console.log(products)
+      })
     },
 
     seeds(server) {
