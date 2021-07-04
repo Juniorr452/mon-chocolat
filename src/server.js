@@ -1,4 +1,4 @@
-import { createServer, Factory, Model } from 'miragejs';
+import { createServer, Factory, Model, Response } from 'miragejs';
 
 export function makeServer({environment = "test"}) {
   return createServer({
@@ -38,8 +38,19 @@ export function makeServer({environment = "test"}) {
       this.get('/products');
       this.post('/checkout', (schema, request) => {
         const products = JSON.parse(request.requestBody);
-        console.log(products)
-      })
+
+        for(const {id, quantity} of products) {
+          const product = schema.products.find(id)
+
+          if(product.availableQuantity - quantity < 0) {
+            return new Response(400);
+          }
+
+          product.update("availableQuantity", product.availableQuantity - quantity)
+        }
+
+        return new Response(200);
+      });      
     },
 
     seeds(server) {
