@@ -8,6 +8,7 @@ import { store } from "../store"
 import { makeServer } from "../server"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { createServer, Response } from "miragejs"
+import { ReactQueryDevtools } from 'react-query/devtools'
 
 if(process.browser) {
   if ((window as any).Cypress) {
@@ -49,6 +50,7 @@ function MyApp({ Component, pageProps }) {
         <Provider store={store}>
           <Component {...pageProps} />
         </Provider>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </ChakraProvider>
   )

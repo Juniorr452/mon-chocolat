@@ -19,8 +19,7 @@ export default function Home() {
 
     return data.products;
   }, {
-    cacheTime: 15 * 1000,
-    refetchOnWindowFocus: false
+    staleTime: 15 * 60 * 1000,
   });
 
   return (
