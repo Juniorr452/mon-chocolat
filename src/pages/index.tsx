@@ -50,18 +50,6 @@ export default function Home() {
               />
             )}
           </HStack>
-          <Select
-            bg="gray.300"
-            color="black"
-            maxW={{
-              base: "200px",
-              lg: "300px"
-            }}
-          >
-            <option value="">Default sorting</option>
-            <option value="">Prix (descendant)</option>
-            <option value="">Prix (ascendant)</option>
-          </Select>
         </HStack>
       </Container>
 
