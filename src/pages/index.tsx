@@ -43,12 +43,12 @@ export default function Home() {
         mb="6"
       >
         <HStack justify="space-between">
-          <HStack>
+          <HStack spacing="4">
             <Heading as="h1">Store</Heading>
             {!isLoading && isFetching && (
               <CircularProgress
-                isIndeterminate 
-                size="30px"
+                isIndeterminate
+                size="20px"
                 color="pink.400" 
               />
             )}
@@ -62,6 +62,8 @@ export default function Home() {
           lg: 'container.lg',
           xl: 'container.xl'
         }}
+        transition="opacity 0.2s linear"
+        opacity={isFetching ? 0.9 : 1}
         py="4"
       >
         {!isLoading && (
