@@ -19,6 +19,11 @@ export const theme = extendTheme({
       body: {
         bg: "gray.900",
         color: "white"
+      },
+      "#__next": {
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh"
       }
     }
   },
