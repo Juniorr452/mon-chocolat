@@ -49,7 +49,7 @@ const CheckoutBox: React.FC<CheckoutBoxProps> = ({
         </HStack>
 
         <HStack justify="space-between">
-          <Text>Sous-total</Text>
+          <Text>Total</Text>
           <Text>{products.length > 0 ? `$${total.toFixed(2)}` : '--.--'}</Text>
         </HStack>
       </VStack>
