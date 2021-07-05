@@ -3,6 +3,8 @@ import { FaTimes } from 'react-icons/fa'
 import { Image, Box, Flex, Text, Icon, Button, Stack, Select } from '@chakra-ui/react'
 import { useAppDispatch } from '../../hooks'
 import { changeQuantity, remove } from '../../features/cart/cartSlice';
+import { MotionBox } from '../../motion';
+
 interface CartItemProps {
   id: number;
   name: string;
@@ -34,7 +36,31 @@ export default function CartItem({
   }
 
   return (
-    <Box pos="relative" bg="gray.100" px="8" py="4" w="100%" borderRadius="12" color="black">
+    <MotionBox 
+      key={id}
+      pos="relative" 
+      bg="gray.100" 
+      px="8" 
+      py="4" 
+      w="100%" 
+      borderRadius="12" 
+      color="black"
+
+      variants={{
+        hidden: {
+          opacity: 0,
+          y: 50
+        },
+        show: {
+          opacity: 1,
+          y: 0,
+          transition: {
+            ease: 'circOut',
+            duration: .5
+          }
+        }
+      }}
+    >
       <Stack 
         direction={{
           base: "column",
@@ -125,6 +151,6 @@ export default function CartItem({
           <Icon as={FaTimes}></Icon>
         </Button>
       </Stack>
-    </Box>
+    </MotionBox>
   )
 }

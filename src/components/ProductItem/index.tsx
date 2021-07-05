@@ -2,6 +2,7 @@ import { Box, HStack, VStack, Text, Icon, Button, useToast } from '@chakra-ui/re
 import { FaCartPlus, FaCheck } from 'react-icons/fa';
 import { add, remove } from '../../features/cart/cartSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import { MotionVStack } from '../../motion';
 
 interface ProductItemProps {
   id: number;
@@ -36,12 +37,29 @@ const ProductItem: React.FC<ProductItemProps> = (product) => {
   }
 
   return (
-    <VStack
+    <MotionVStack
+      key={product.id}
       bg="gray.400"
       p="8"
       color="black"
       pos="relative"
       borderRadius="32px"
+
+      variants={{
+        hidden: {
+          opacity: 0,
+          y: 50
+        },
+        show: {
+          opacity: 1,
+          y: 0,
+
+          transition: {
+            ease: 'circOut',
+            duration: .7
+          }
+        }
+      }}
     >
       <HStack w="100%">
         <Button
@@ -66,7 +84,7 @@ const ProductItem: React.FC<ProductItemProps> = (product) => {
         <Text mt="8" fontSize="larger" fontWeight="bold" letterSpacing="3px">{product.name}</Text>
         <Text>{available ? `$${product.price}` : 'indisponible' }</Text>
       </VStack>
-    </VStack>
+    </MotionVStack>
   )
 }
 

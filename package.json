@@ -19,7 +19,7 @@
     "@fontsource/raleway": "^4.4.5",
     "@fontsource/roboto": "^4.4.5",
     "@reduxjs/toolkit": "^1.6.0",
-    "framer-motion": "4",
+    "framer-motion": "^4.1.17",
     "miragejs": "^0.1.41",
     "next": "11.0.0",
     "react": "17.0.2",

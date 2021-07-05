@@ -1,9 +1,11 @@
 import React from 'react';
 import Head from 'next/head'
-import { Container, HStack, Heading, SimpleGrid, CircularProgress, Box } from '@chakra-ui/react';
+import { Container, HStack, Heading, CircularProgress } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import ProductItem from '../components/ProductItem';
 import Page from '../components/Page';
+import { MotionBox, MotionSimpleGrid } from '../motion';
+import { AnimatePresence } from 'framer-motion';
 
 interface Product {
   id: number;
@@ -63,22 +65,68 @@ export default function Home() {
         opacity={isFetching ? 0.9 : 1}
         py="4"
       >
-        {!isLoading && (
-          <SimpleGrid minChildWidth="300px" gap="40px" maxW="992px" mx="auto" data-testid="products-list">
-            {products && products.map(product => <ProductItem key={product.id} {...product}/>)}
-          </SimpleGrid>
-        )}
+        <AnimatePresence
+          exitBeforeEnter
+        >
+          {!isLoading && (
+            <MotionSimpleGrid 
+              minChildWidth="300px" 
+              gap="40px" 
+              maxW="992px" 
+              mx="auto" 
+              data-testid="products-list"
+              
+              key="products-list"
+              variants={{
+                show: {
+                  transition: {
+                    delayChildren: 0.1,
+                    staggerChildren: 0.1
+                  }
+                }
+              }}
 
-        {isLoading && (
-          <Box w="fit-content" mx="auto">
-            <CircularProgress 
-              isIndeterminate 
-              color="pink.400" 
-              size="100px"
-              thickness="6px"
-            />
-          </Box>
-        )}
+              initial="hidden"
+              animate="show"
+            >
+              {products.map(product => (
+                <ProductItem key={product.id} {...product}/>
+              ) 
+              )}
+            </MotionSimpleGrid>
+          )}
+
+          {isLoading && (
+            <MotionBox 
+              w="fit-content" 
+              mx="auto"
+              
+              key="loading"
+
+              variants={{
+                hidden: {opacity: 0, scale: 0},
+                show: {
+                  opacity: 1, 
+                  scale: 1,
+                  transition: {
+                    duration: .5,
+                    ease: [0.6, 0.01, -0.05, 0.95],
+                  }
+                }
+              }}
+              initial="hidden"
+              animate="show"
+              exit="hidden"
+            >
+              <CircularProgress 
+                isIndeterminate 
+                color="pink.400" 
+                size="100px"
+                thickness="6px"
+              />
+            </MotionBox>
+          )}
+        </AnimatePresence>
       </Container>
     </Page>
   )
