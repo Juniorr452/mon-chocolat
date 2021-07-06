@@ -1,8 +1,9 @@
-import { Box, HStack, VStack, Text, Icon, Button, useToast } from '@chakra-ui/react';
+import { Box, HStack, VStack, Text, Button, Icon, useToast } from '@chakra-ui/react';
+import { AnimatePresence } from 'framer-motion';
 import { FaCartPlus, FaCheck } from 'react-icons/fa';
 import { add, remove } from '../../features/cart/cartSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { MotionVStack } from '../../motion';
+import { MotionVStack, MotionBox } from '../../motion';
 
 interface ProductItemProps {
   id: number;
@@ -74,7 +75,52 @@ const ProductItem: React.FC<ProductItemProps> = (product) => {
           data-testid="cartbutton"
           isDisabled={!available}
         >
-          <Icon as={productInCart ? FaCheck : FaCartPlus} fontSize="md"/>
+          <AnimatePresence exitBeforeEnter>
+            {productInCart 
+              ? (
+                <MotionBox
+                  key="check"
+                  variants={{
+                    hidden: { scale: 0 },
+                    show: { 
+                      scale: 1,
+                      transition: {
+                        ease: 'backOut'
+                      }
+                    }
+                  }}
+
+                  initial="hidden"
+                  animate="show"
+                  exit="hidden"
+                >
+                  <Icon 
+                    as={FaCheck} 
+                    fontSize="md"
+                  />
+                </MotionBox>
+              )
+              : (
+                <MotionBox
+                  key="cart-plus"
+                  variants={{
+                    hidden: { scale: 0 },
+                    show: { scale: 1 }
+                  }}
+    
+                  initial="hidden"
+                  animate="show"
+                  exit="hidden"
+                >
+                  <Icon 
+                    as={FaCartPlus} 
+                    fontSize="md"
+                  />
+                </MotionBox>
+              )
+            }
+           
+          </AnimatePresence>
         </Button>
       </HStack>
 

@@ -11,6 +11,7 @@ interface CartItemProps {
   price: number;
   quantity: number;
   availableQuantity: number;
+  i?: number;
 }
 
 export default function CartItem({
@@ -18,7 +19,8 @@ export default function CartItem({
   name,
   price,
   quantity,
-  availableQuantity
+  availableQuantity,
+  i = 0
 }: CartItemProps) {
   const dispatch = useAppDispatch();
 
@@ -56,10 +58,24 @@ export default function CartItem({
           y: 0,
           transition: {
             ease: 'circOut',
-            duration: .5
+            duration: .5,
+            delay: 0.1 * i
+          }
+        },
+        exit: {
+          opacity: 0,
+          x: -100,
+          transition: {
+            ease: 'easeInOut',
           }
         }
       }}
+
+      initial="hidden"
+      animate="show"
+      exit="exit"
+
+      layout
     >
       <Stack 
         direction={{

@@ -1,12 +1,13 @@
 import Head from 'next/head'
-import { Container, Stack, VStack, Heading, Text, useToast } from '@chakra-ui/react'
+import { Container, Stack, VStack, Heading, useToast } from '@chakra-ui/react'
 import CartItem from '../components/CartItem'
 import CheckoutBox from '../components/CheckoutBox'
 import { useAppDispatch, useAppSelector } from '../hooks'
 import { clear } from '../features/cart/cartSlice'
 import { useMutation, useQueryClient } from 'react-query'
 import Page from '../components/Page'
-import { MotionVStack } from '../motion'
+import { MotionText } from '../motion'
+import { AnimatePresence } from 'framer-motion'
 
 export default function Cart() {
   const productsInCart = Object.values(useAppSelector(state => state.cart.products));
@@ -79,34 +80,48 @@ export default function Cart() {
           }}
           spacing="8"
         >
-          <MotionVStack 
-            w="100%"
-            spacing="4"
-            data-testid="cart-list"
+          <VStack w="100%">
+            <VStack 
+              w="100%"
+              spacing="4"
+              data-testid="cart-list"
+            >
+              <AnimatePresence presenceAffectsLayout>
+                {productsInCart.length > 0 && (
+                  productsInCart.map((product, i) => (
+                    <CartItem key={product.id} i={i} {...product}/>
+                  ))
+                )}
+              </AnimatePresence>            
+            </VStack>
 
-            variants={{
-              show: {
-                transition: {
-                  delayChildren: 0.1,
-                  staggerChildren: 0.1
-                }
-              }
-            }}
-            initial="hidden"
-            animate="show"
-          >
-            {productsInCart.length > 0 && (
-              productsInCart.map(product => (
-                <CartItem key={product.id} {...product}/>
-              ))
-            )}
+            <AnimatePresence>
+              {productsInCart.length === 0 && (
+                <MotionText 
+                  key="vide"
+                  as="h2" 
+                  fontSize="2xl" 
+                  w="100%"
+                  variants={{
+                    hidden: { opacity: 0 },
+                    show: { 
+                      opacity: 1,
+                      transition: {
+                        delay: .5
+                      }
+                    }
+                  }}
 
-            {productsInCart.length === 0 && (
-              <Text as="h2" fontSize="2xl" w="100%">Votre panier est vide</Text>
-            )}
-          </MotionVStack>
+                  initial="hidden"
+                  animate="show"
+                  exit="hidden"
+                >
+                  Votre panier est vide
+                </MotionText>
+              )}
+            </AnimatePresence>
+          </VStack>
 
-          
           <CheckoutBox 
             products={productsInCart} 
             shipping={{
