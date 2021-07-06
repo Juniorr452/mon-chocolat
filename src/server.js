@@ -54,7 +54,7 @@ export function makeServer({environment = "test"}) {
     },
 
     seeds(server) {
-      server.createList("product", 11);
+      server.createList("product", 9);
     }
   })
 }
