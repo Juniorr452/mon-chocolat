@@ -1,6 +1,7 @@
 import "@fontsource/raleway/400.css"
 import "@fontsource/roboto/700.css"
 
+import React from "react"
 import { ChakraProvider } from "@chakra-ui/react"
 import { theme } from "../theme"
 import { Provider } from "react-redux"
@@ -9,6 +10,10 @@ import { makeServer } from "../server"
 import { QueryClient, QueryClientProvider } from "react-query"
 import { createServer, Response } from "miragejs"
 import { ReactQueryDevtools } from 'react-query/devtools'
+import Head from 'next/head'
+import TopNav from "../components/Layout/TopNav"
+import Footer from "../components/Layout/Footer"
+import { AnimatePresence } from "framer-motion"
 
 if(process.browser) {
   if ((window as any).Cypress) {
@@ -37,16 +42,33 @@ if(process.browser) {
 
 const queryClient = new QueryClient();
 
+const Providers: React.FC = ({children}) => (
+  <ChakraProvider theme={theme}>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        {children}
+      </Provider>
+      <ReactQueryDevtools initialIsOpen={true} />
+    </QueryClientProvider>
+  </ChakraProvider>
+)
+
 function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider theme={theme}>
-      <QueryClientProvider client={queryClient}>
-        <Provider store={store}>
-          <Component {...pageProps} />
-        </Provider>
-        <ReactQueryDevtools initialIsOpen={true} />
-      </QueryClientProvider>
-    </ChakraProvider>
+    <Providers>
+      <Head>
+        <meta name="description" content="Mon chocolat fait par Ênio Júnior" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <TopNav />
+
+      <AnimatePresence exitBeforeEnter>
+        <Component {...pageProps} />
+      </AnimatePresence>
+      
+      <Footer />
+    </Providers>
   )
 }
 

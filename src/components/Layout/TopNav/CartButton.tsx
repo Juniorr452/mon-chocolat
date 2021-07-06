@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import { Flex, Icon, Button} from '@chakra-ui/react';
 import { FaShoppingCart } from 'react-icons/fa';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../../hooks';
 import { AnimatePresence } from 'framer-motion';
-import { MotionFlex } from '../../motion';
+import { MotionFlex } from '../../../motion';
 
 const CartButton: React.FC = () => {
   const productsInCartQuantity = useAppSelector(state => (

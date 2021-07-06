@@ -3,10 +3,9 @@ import Head from 'next/head'
 import { Container, HStack, Heading, CircularProgress } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import ProductItem from '../components/ProductItem';
-import Page from '../components/Page';
 import { MotionBox, MotionSimpleGrid } from '../motion';
 import { AnimatePresence } from 'framer-motion';
-
+import Main from '../components/Layout/Main';
 interface Product {
   id: number;
   name: string;
@@ -25,11 +24,9 @@ export default function Home() {
   });
 
   return (
-    <Page>
+    <Main>
       <Head>
         <title>Mon Chocolat</title>
-        <meta name="description" content="Projet fait par Ênio Júnior" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Container 
@@ -128,6 +125,6 @@ export default function Home() {
           )}
         </AnimatePresence>
       </Container>
-    </Page>
+    </Main>
   )
 }

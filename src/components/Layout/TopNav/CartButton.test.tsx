@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import CartButton from "./CartButton";
-import * as hooks from "../../hooks";
+import * as hooks from "../../../hooks";
 
 describe("CartButton", () => {
   it("does not show quantity when there are no items in the cart", () => {
