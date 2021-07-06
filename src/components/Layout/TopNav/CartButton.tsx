@@ -32,7 +32,7 @@ const CartButton: React.FC = () => {
               
               w="20px"
               h="20px"
-              bg="pink.500"
+              bg="orange.500"
               borderRadius="full"
               
               justify="center"

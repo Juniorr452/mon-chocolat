@@ -7,7 +7,7 @@ import logo from '../../../public/logo-text.svg';
 
 export default function TopNav() {
   return (
-    <Box bg="gray.700" as="nav" w="100%">
+    <Box bg="gray.900" as="nav" w="100%">
       <Container 
         maxW={{
           base: 'container.md',

@@ -15,17 +15,17 @@ const Footer: React.FC = () => {
       mt={"8"}
       p={["6", "8"]}
 
-      bg="gray.800"
+      bg="gray.900"
     >
       <Text 
         mt="4" 
         fontSize={["smaller", "small"]}
-        color="gray.400"
+        color="orange.200"
         textAlign="center"
       >
         Fait avec ❤ par Ênio Júnior à Brasília.
         <br/>
-        <Link color="gray.200" href="https://github.com/Juniorr452/mon-chocolat">
+        <Link color="white" href="https://github.com/Juniorr452/mon-chocolat">
           Consultez le code source sur Github.
         </Link>
       </Text>

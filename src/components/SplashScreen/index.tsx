@@ -79,10 +79,13 @@ const SplashScreen: React.FC = ({children}) => {
           direction="column"
           minH="100vh"
 
-          variants={variants}
+          variants={{
+            hidden: { opacity: 0, scale: 1.05, transition: { duration: .25, ease: 'easeOut'}  },
+            show: { opacity: 1, scale: 1.0, transition: { duration: .25, ease: 'easeOut'} }
+          }}
           initial="hidden"
           animate="show"
-          exit="exit"
+          exit="hidden"
         >
           {children}
         </MotionFlex>

@@ -47,6 +47,7 @@ export default function CartItem({
       w="100%" 
       borderRadius="12" 
       color="black"
+      shadow="md"
 
       variants={{
         hidden: {

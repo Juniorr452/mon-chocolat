@@ -40,11 +40,11 @@ const ProductItem: React.FC<ProductItemProps> = (product) => {
   return (
     <MotionVStack
       key={product.id}
-      bg="gray.400"
       p="8"
       color="black"
       pos="relative"
       borderRadius="32px"
+      shadow="lg"
 
       variants={{
         hidden: {
@@ -68,7 +68,7 @@ const ProductItem: React.FC<ProductItemProps> = (product) => {
           ml="auto"
           bg="transparent"
           border="1px"
-          borderColor="gray.500"
+          borderColor={productInCart ? "green.500" : "blue.900"}
           borderRadius="100%"
           cursor="pointer"
           onClick={handleCartClick}
@@ -80,6 +80,7 @@ const ProductItem: React.FC<ProductItemProps> = (product) => {
               ? (
                 <MotionBox
                   key="check"
+                  color="green.500"
                   variants={{
                     hidden: { scale: 0 },
                     show: { 
@@ -89,7 +90,7 @@ const ProductItem: React.FC<ProductItemProps> = (product) => {
                       }
                     }
                   }}
-
+                  
                   initial="hidden"
                   animate="show"
                   exit="hidden"
@@ -103,11 +104,12 @@ const ProductItem: React.FC<ProductItemProps> = (product) => {
               : (
                 <MotionBox
                   key="cart-plus"
+                  color="blue.900"
+                  
                   variants={{
                     hidden: { scale: 0 },
                     show: { scale: 1 }
                   }}
-    
                   initial="hidden"
                   animate="show"
                   exit="hidden"
@@ -124,7 +126,7 @@ const ProductItem: React.FC<ProductItemProps> = (product) => {
         </Button>
       </HStack>
 
-      <Box w="100px" h="200px" bg="gray.700"></Box>
+      <Box w="100px" h="200px" bg="orange.300"></Box>
 
       <VStack spacing="0">
         <Text mt="8" fontSize="larger" fontWeight="bold" letterSpacing="3px">{product.name}</Text>

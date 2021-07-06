@@ -45,7 +45,7 @@ export default function Home() {
               <CircularProgress
                 isIndeterminate
                 size="20px"
-                color="pink.400" 
+                color="orange.400" 
               />
             )}
           </HStack>
@@ -117,7 +117,7 @@ export default function Home() {
             >
               <CircularProgress 
                 isIndeterminate 
-                color="pink.400" 
+                color="orange.400" 
                 size="100px"
                 thickness="6px"
               />

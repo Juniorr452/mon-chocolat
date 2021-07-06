@@ -35,6 +35,7 @@ const CheckoutBox: React.FC<CheckoutBoxProps> = ({
       p="6" 
       borderRadius="12"
       color="black"
+      shadow="lg"
     >
       <VStack 
         align="start" 
