@@ -14,6 +14,7 @@ import Head from 'next/head'
 import TopNav from "../components/Layout/TopNav"
 import Footer from "../components/Layout/Footer"
 import { AnimatePresence } from "framer-motion"
+import { AppProps } from "next/dist/next-server/lib/router/router"
 
 if(process.browser) {
   if ((window as any).Cypress) {
@@ -53,7 +54,7 @@ const Providers: React.FC = ({children}) => (
   </ChakraProvider>
 )
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, router }: AppProps) {
   return (
     <Providers>
       <Head>
@@ -63,8 +64,11 @@ function MyApp({ Component, pageProps }) {
 
       <TopNav />
 
-      <AnimatePresence exitBeforeEnter>
-        <Component {...pageProps} />
+      <AnimatePresence 
+        exitBeforeEnter 
+        onExitComplete={() => window.scrollTo(0, 0)}
+      >
+        <Component {...pageProps} key={router.route}/>
       </AnimatePresence>
       
       <Footer />

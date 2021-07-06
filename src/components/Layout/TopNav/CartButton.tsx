@@ -4,6 +4,7 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { useAppSelector } from '../../../hooks';
 import { AnimatePresence } from 'framer-motion';
 import { MotionFlex } from '../../../motion';
+import NoScrollLink from '../../NoScrollLink';
 
 const CartButton: React.FC = () => {
   const productsInCartQuantity = useAppSelector(state => (
@@ -11,7 +12,7 @@ const CartButton: React.FC = () => {
   ));
 
   return (
-    <Link href="/cart" passHref>
+    <NoScrollLink href="/cart" passHref>
       <Button
         p="4"
         as="a"
@@ -66,7 +67,7 @@ const CartButton: React.FC = () => {
           )}
         </AnimatePresence>
       </Button>
-    </Link>
+    </NoScrollLink>
   )
 }
 

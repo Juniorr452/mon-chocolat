@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Box, Container, HStack, Heading} from '@chakra-ui/react';
 import CartButton from './CartButton';
+import NoScrollLink from '../../NoScrollLink';
 
 export default function TopNav() {
   return (
@@ -17,9 +18,9 @@ export default function TopNav() {
           <Heading
             fontSize="2xl"
           >
-            <Link href="/">
+            <NoScrollLink href="/">
               <a data-testid="home-link">mon chocolat</a>
-            </Link>
+            </NoScrollLink>
           </Heading>
           <CartButton />
         </HStack>
