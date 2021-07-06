@@ -1,11 +1,13 @@
-import Link from 'next/link'
-import { Box, Container, HStack, Heading} from '@chakra-ui/react';
+import Image from 'next/image'
+import { Box, Container, HStack, Heading, Link} from '@chakra-ui/react';
 import CartButton from './CartButton';
 import NoScrollLink from '../../NoScrollLink';
 
+import logo from '../../../public/logo-text.svg';
+
 export default function TopNav() {
   return (
-    <Box bg="gray.700" as="nav">
+    <Box bg="gray.700" as="nav" w="100%">
       <Container 
         maxW={{
           base: 'container.md',
@@ -19,7 +21,9 @@ export default function TopNav() {
             fontSize="2xl"
           >
             <NoScrollLink href="/">
-              <a data-testid="home-link">mon chocolat</a>
+              <Link data-testid="home-link" d="flex" justifyContent="center">
+                <Image src={logo} alt="" width="185" height="40"/>
+              </Link>
             </NoScrollLink>
           </Heading>
           <CartButton />

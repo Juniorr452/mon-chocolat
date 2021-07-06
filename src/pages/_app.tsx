@@ -15,6 +15,7 @@ import TopNav from "../components/Layout/TopNav"
 import Footer from "../components/Layout/Footer"
 import { AnimatePresence } from "framer-motion"
 import { AppProps } from "next/dist/next-server/lib/router/router"
+import SplashScreen from "../components/SplashScreen"
 
 if(process.browser) {
   if ((window as any).Cypress) {
@@ -49,7 +50,7 @@ const Providers: React.FC = ({children}) => (
       <Provider store={store}>
         {children}
       </Provider>
-      <ReactQueryDevtools initialIsOpen={true} />
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </ChakraProvider>
 )
@@ -62,16 +63,19 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <TopNav />
+      <SplashScreen>
+        <TopNav />
 
-      <AnimatePresence 
-        exitBeforeEnter 
-        onExitComplete={() => window.scrollTo(0, 0)}
-      >
-        <Component {...pageProps} key={router.route}/>
-      </AnimatePresence>
-      
-      <Footer />
+        <AnimatePresence 
+          exitBeforeEnter 
+          onExitComplete={() => window.scrollTo(0, 0)}
+        >
+          <Component {...pageProps} key={router.route}/>
+        </AnimatePresence>
+        
+        <Footer />
+      </SplashScreen>
+
     </Providers>
   )
 }

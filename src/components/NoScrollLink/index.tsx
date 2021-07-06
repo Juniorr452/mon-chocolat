@@ -8,9 +8,9 @@ interface NoScrollLinkProps extends LinkProps {
   children: ReactNode
 }
 
-const NoScrollLink = ({ children, href, passHref }: NoScrollLinkProps): JSX.Element => (
-  <Link href={href} passHref={passHref} scroll={false}>
-      {children}
+const NoScrollLink = ({ children, ...rest }: NoScrollLinkProps): JSX.Element => (
+  <Link scroll={false} {...rest}>
+    {children}
   </Link>
 )
 
