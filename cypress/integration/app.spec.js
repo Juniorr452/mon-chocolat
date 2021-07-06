@@ -30,7 +30,7 @@ describe('App', () => {
       cy.wrap($product).find('button').click()
     })
 
-    cy.get('[data-testid=cart-link]').click()
+    cy.get('[data-testid=cart-link]').click({ force: true })
 
     cy.get('[data-testid=cart-list]').find('> div').should('have.length', length)
   })
@@ -42,7 +42,7 @@ describe('App', () => {
 
     cy.visit('/')
     cy.get('[data-testid=products-list]').find('> div').find('button').click()
-    cy.get('[data-testid=cart-link]').click()
+    cy.get('[data-testid=cart-link]').click({ force: true })
     cy.get('button[type=submit]').click()
     cy.get('[data-testid=home-link]').click()
 
