@@ -32,12 +32,14 @@ export default function Cart() {
       toast({
         title: "Achat réussi!",
         status: "success",
+        position: "top",
       })
     },
     onError: () => {
       toast({
         title: "Erreur inattendue",
         status: "error",
+        position: "top",
       })
     }
   })
@@ -127,6 +129,7 @@ export default function Cart() {
               price: 9.99
             }}
             onCheckout={handleCheckout}
+            isSubmitting={mutation.isLoading}
           />
         </Stack>
       </Container>

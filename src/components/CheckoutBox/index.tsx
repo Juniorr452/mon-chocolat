@@ -15,12 +15,14 @@ interface CheckoutBoxProps {
 
   products: Product[];
   onCheckout?: (total: number) => void;
+  isSubmitting?: boolean;
 }
 
 const CheckoutBox: React.FC<CheckoutBoxProps> = ({
   shipping,
   products,
-  onCheckout = () => {}
+  onCheckout = () => {},
+  isSubmitting = false,
 }) => {
   const total = products.reduce((prev, product) => prev + (product.price * product.quantity), 0) + shipping.price;
 
@@ -60,6 +62,7 @@ const CheckoutBox: React.FC<CheckoutBoxProps> = ({
         isDisabled={products.length === 0}
         onClick={() => onCheckout(total)}
         type="submit"
+        isLoading={isSubmitting}
       >
         Passer la comande
       </Button>
