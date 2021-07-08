@@ -60,7 +60,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     <Providers>
       <Head>
         <meta name="description" content="Mon chocolat fait par Ênio Júnior" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
 
       <SplashScreen>
