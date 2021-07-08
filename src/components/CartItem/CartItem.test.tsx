@@ -19,7 +19,7 @@ describe('CartItem', () => {
         price={price}
         quantity={quantity}
         availableQuantity={10}
-        imageUrl=""
+        imageUrl="/none.png"
       />
     );
 
@@ -35,7 +35,7 @@ describe('CartItem', () => {
         price={price}
         quantity={quantity}
         availableQuantity={10}
-        imageUrl=""
+        imageUrl="/none.png"
       />
     );
 
@@ -54,7 +54,7 @@ describe('CartItem', () => {
         price={10}
         quantity={2}
         availableQuantity={3}
-        imageUrl=""
+        imageUrl="/none.png"
       />
     );
 
@@ -76,7 +76,7 @@ describe('CartItem', () => {
         price={10}
         quantity={2}
         availableQuantity={3}
-        imageUrl=""
+        imageUrl="/none.png"
       />
     );
 
