@@ -3,7 +3,7 @@ import { Box, Container, HStack, Heading, Link} from '@chakra-ui/react';
 import CartButton from './CartButton';
 import NoScrollLink from '../../NoScrollLink';
 
-import logo from '../../../public/logo-text.svg';
+import logo from '/public/logo-text.svg';
 
 export default function TopNav() {
   return (

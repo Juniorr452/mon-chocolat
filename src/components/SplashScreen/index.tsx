@@ -4,7 +4,7 @@ import { AnimatePresence, Variants } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { MotionFlex } from '../../motion';
 
-import logo from '../../public/logo.svg';
+import logo from '/public/logo.svg';
 
 const transition = {
   ease: [0.6, 0.01, -0.05, 0.95],

@@ -1,5 +1,6 @@
 import { Box, HStack, VStack, Text, Button, Icon, useToast } from '@chakra-ui/react';
 import { AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { FaCartPlus, FaCheck } from 'react-icons/fa';
 import { add, remove } from '../../features/cart/cartSlice';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -10,6 +11,7 @@ interface ProductItemProps {
   name: string;
   price: number;
   availableQuantity: number;
+  imageUrl: string;
 }
 
 const ProductItem: React.FC<ProductItemProps> = (product) => {
@@ -126,7 +128,28 @@ const ProductItem: React.FC<ProductItemProps> = (product) => {
         </Button>
       </HStack>
 
-      <Box w="100px" h="200px" bg="orange.300"></Box>
+      <Box w="100%" pos="relative">
+        <Box w="110px" h="210px" bg="orange.300" mx="auto"></Box>
+
+        <Box
+          pos="absolute"
+          top="50%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          w="200px"
+          h="150px"
+        >
+          <Image 
+            src={product.imageUrl}
+            alt=""
+            width={200} 
+            height={150} 
+            layout="responsive"
+            objectFit="contain"
+          />
+        </Box>        
+      </Box>
+      
 
       <VStack spacing="0">
         <Text mt="8" fontSize="larger" fontWeight="bold" letterSpacing="3px">{product.name}</Text>

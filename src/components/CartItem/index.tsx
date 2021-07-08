@@ -1,9 +1,10 @@
 import { ChangeEvent } from 'react';
 import { FaTimes } from 'react-icons/fa'
-import { Image, Box, Flex, Text, Icon, Button, Stack, Select } from '@chakra-ui/react'
+import { Box, Flex, Text, Icon, Button, Stack, Select } from '@chakra-ui/react'
 import { useAppDispatch } from '../../hooks'
 import { changeQuantity, remove } from '../../features/cart/cartSlice';
 import { MotionBox } from '../../motion';
+import Image from 'next/image';
 
 interface CartItemProps {
   id: number;
@@ -11,6 +12,7 @@ interface CartItemProps {
   price: number;
   quantity: number;
   availableQuantity: number;
+  imageUrl: string;
   i?: number;
 }
 
@@ -20,6 +22,7 @@ export default function CartItem({
   price,
   quantity,
   availableQuantity,
+  imageUrl,
   i = 0
 }: CartItemProps) {
   const dispatch = useAppDispatch();
@@ -86,16 +89,23 @@ export default function CartItem({
         justify="space-between"
         spacing="8"
       >
-        <Image
-          src="https://via.placeholder.com/100"
-          alt=""
+        <Box
           mx="auto"
           w={{
             base: "200px",
             lg: "120px",
             xl: "150px"
           }}
-        />
+        >
+          <Image
+            src={imageUrl}
+            alt=""
+            width={150}
+            height={150}
+            layout="responsive"
+            objectFit="contain"
+          />
+        </Box>
 
         <Flex direction="column" align="left" flex="1" p="2">
           <Text 

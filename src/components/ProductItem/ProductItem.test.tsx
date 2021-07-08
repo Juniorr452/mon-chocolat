@@ -18,6 +18,7 @@ describe('ProductItem', () => {
         name="product"
         price={price}
         availableQuantity={5}
+        imageUrl=""
       />
     );
 
@@ -29,7 +30,8 @@ describe('ProductItem', () => {
       id: 1,
       name: "product",
       price: 19.99,
-      availableQuantity: 5
+      availableQuantity: 5,
+      imageUrl: ""
     }
 
     render(
@@ -54,6 +56,7 @@ describe('ProductItem', () => {
         name="product"
         price={19.99}
         availableQuantity={5}
+        imageUrl=""
       />
     );
 
@@ -71,6 +74,7 @@ describe('ProductItem', () => {
         name="product"
         price={19.99}
         availableQuantity={0}
+        imageUrl=""
       />
     );
     
@@ -85,6 +89,7 @@ describe('ProductItem', () => {
         name="product"
         price={19.99}
         availableQuantity={1}
+        imageUrl=""
       />
     );
 

@@ -20,6 +20,14 @@ export function makeServer({environment = "test"}) {
           ]
 
           return quantity[i % quantity.length]
+        },
+
+        imageUrl(i) {
+          const imageIds = [
+            1, 2, 3, 4, 5
+          ]
+
+          return `/img/products/${imageIds[i % imageIds.length]}.png`
         }
       }),
     },
