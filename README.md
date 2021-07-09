@@ -1,34 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align="center">
+	<img src="./.github/logo.png"/>
+</h1>
 
-## Getting Started
+<p align="center">
+<img src="https://vercelbadge.vercel.app/api/Juniorr452/mon-chocolat"/> <img src="https://img.shields.io/badge/License-MIT-blue.svg"/>
+</p>
 
-First, run the development server:
+<p align="center">Mon chocolat is a personal project that implements the e-commerce cart functionality using Redux. <a href="https://mon-chocolat-juniorr452.vercel.app/" rel="noopener noreferrer">Check out the live demo here</a>.
 
-```bash
-npm run dev
-# or
+## About  
+
+<p align="center">
+  <img src="./.github/monchocolat.gif"/>
+</p>
+
+Mon chocolat was made to put my Redux and testing skills in practice. The goal was to implement a 2-page web app that allowed the user to add products to cart and review his order on checkout.
+
+I made use of MirageJS to mock http requests and make development, testing and deploying the live demo easier. That way, I would not need to create a separate server and database to store data. For details on what endpoints are mocked, you can check the server.js or its test file. 
+
+I feel this project helped me refine my understading in Redux and testing pages, components and business logic, allowing to make more maintainable apps and giving an extra layer security to develop new functionalities.
+
+## Technologies used
+
+* NextJS
+* Redux
+* Chakra-UI
+* Figma Motion
+* MirageJS
+* React Query
+* Cypress
+* Jest
+* Typescript
+
+## Run
+
+Just clone this project and run the following commands:
+
+```
+yarn
+
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Then open [http://localhost:3000](http://localhost:3000) in your browser to see the website.
