@@ -11,6 +11,7 @@ interface Product {
   name: string;
   price: number;
   availableQuantity: number;
+  imageUrl: string;
 }
 
 export default function Home() {
