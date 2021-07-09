@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router';
 import { Container, Stack, VStack, Heading, useToast } from '@chakra-ui/react'
 import CartItem from '../components/CartItem'
 import CheckoutBox from '../components/CheckoutBox'
@@ -14,6 +15,7 @@ export default function Cart() {
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
   const toast = useToast();
+  const router = useRouter();
 
   const mutation = useMutation(async () => {
     return fetch('/api/checkout', {
@@ -34,6 +36,8 @@ export default function Cart() {
         status: "success",
         position: "top",
       })
+      
+      router.push('/');
     },
     onError: () => {
       toast({
@@ -68,7 +72,7 @@ export default function Cart() {
 
       <Container 
         maxW={{
-          base: 'container.md',
+          base: '480px',
           lg: 'container.lg',
           xl: 'container.xl'
         }}
@@ -77,6 +81,10 @@ export default function Cart() {
           direction={{
             base: 'column',
             lg: 'row'
+          }}
+          align={{
+            base: 'center',
+            lg: 'unset'
           }}
           spacing="8"
         >
